@@ -1,0 +1,141 @@
+{
+  "version": "v1",
+  "---Edge node configuration---": "Each item in the list represents an edge node. The item's value with format x:y define the client nodes. For example in edge node 0 item, its value is 0:1, which means that the edge_node_0 has 2 clients being indexed from 0 to 1",
+  "---Mid node configuration---": "Each item in the list represents A LEVEL OF MID NODE (FOG NODE) and contains a number of key-value objects. Each object represents a mid node. The key represents the index of the mid node. The item, with format x:y defines the child nodes of the corresponding mid node. For example in mid node 0 object, its value is edge_node_0:edge_node_1, which means that mid node 0 has 2 children, which are edge_node_0 and edge_node_1",
+  "---Cloud configuration---": "Same as mid node",
+  "architecture": {
+    "simple": {
+      "edge_node": [
+        "0:1",
+        "2:4"
+      ],
+      "cloud": "edge_node_0:edge_node_1"
+    },
+    "complex": {
+      "edge_node": [
+        "0:1",
+        "2:3",
+        "4:5",
+        "6:7",
+        "8:9"
+      ],
+      "mid_node": [
+        {
+          "0": "edge_node_0:edge_node_1",
+          "1": "edge_node_2:edge_node_3"
+        },
+        {
+          "2": "edge_node_4:mid_node_1"
+        }
+      ],
+      "cloud": "mid_node_0:mid_node_2"
+    },
+    "simple_paper_based": {
+      "edge_node": [
+        "0:9",
+        "10:19"
+      ],
+      "cloud": "edge_node_0:edge_node_1"
+    }
+  },
+  "---Edge node class configuration---": "Each item in the list represents an edge node. The item's value represents the data class ids, which are assigned to the corresponding edge node.",
+  "---Mid node and Cloud": "The class distribution configuration for mid node and clouds is defined as follow: it simply takes all classes which are assigned to its children. For example in the complex architecture configuration, mid_node_0 will take all classes, which are assigned to edge_node_0 and edge_node_1, i.e. classes 0, 1, 2 and 3",
+  "class_distribution": {
+    "simple": [
+      {
+        "edge_node": [
+          "0,1,2,3",
+          "4,5,6,7,8,9"
+        ]
+      }
+    ],
+    "complex": [
+      {
+        "edge_node": [
+          "0,1",
+          "2,3",
+          "4,5",
+          "6,7",
+          "8,9"
+        ]
+      }
+    ],
+    "simple_paper_based": [
+      {
+        "edge_node": [
+          "0,1,2,3,4,5,6,7,8,9",
+          "0,1,2,3,4,5,6,7,8,9"
+        ]
+      }
+    ]
+  },
+  "parameters": {
+    "net_config": "simple",
+    "batch_size": 32,
+    "lr": 0.001,
+    "num_epochs": 50,
+    "dataset": "fashion-mnist"
+  },
+  "experiment": [
+    {
+      "name": "paper_tau_15_4",
+      "architecture": "simple_paper_based",
+      "cloud_interval_steps": 60,
+      "interval_ratio_client": "1/4",
+      "interval_ratio_edge": "1/15",
+      "num_classes_per_client": 1,
+      "mqtt_broker_ip": "172.32.0.100",
+      "mqtt_broker_port": 1883
+    },
+    {
+      "name": "paper_tau_30_2",
+      "architecture": "simple_paper_based",
+      "cloud_interval_steps": 60,
+      "interval_ratio_client": "1/2",
+      "interval_ratio_edge": "1/30",
+      "num_classes_per_client": 1,
+      "mqtt_broker_ip": "172.32.0.101",
+      "mqtt_broker_port": 1883
+    },
+    {
+      "name": "paper_tau_60_1",
+      "architecture": "simple_paper_based",
+      "cloud_interval_steps": 60,
+      "interval_ratio_client": "1",
+      "interval_ratio_edge": "1/60",
+      "num_classes_per_client": 1,
+      "mqtt_broker_ip": "172.32.0.102",
+      "mqtt_broker_port": 1883
+    },
+    {
+      "name": "case_c_paper_1",
+      "architecture": "simple_paper_based",
+      "cloud_interval_steps": 60,
+      "interval_ratio_client": "1/4",
+      "interval_ratio_edge": "1/15",
+      "num_classes_per_client": 1,
+      "mqtt_broker_ip": "172.32.0.103",
+      "mqtt_broker_port": 1883
+    },
+    {
+      "name": "case_c_paper_2",
+      "architecture": "simple_paper_based",
+      "cloud_interval_steps": 60,
+      "interval_ratio_client": "1/2",
+      "interval_ratio_edge": "1/30",
+      "num_classes_per_client": 1,
+      "mqtt_broker_ip": "172.32.0.104",
+      "mqtt_broker_port": 1883
+    },
+    {
+      "name": "case_c_paper_3",
+      "architecture": "simple_paper_based",
+      "cloud_interval_steps": 60,
+      "interval_ratio_client": "1",
+      "interval_ratio_edge": "1/60",
+      "num_classes_per_client": 1,
+      "mqtt_broker_ip": "172.32.0.105",
+      "mqtt_broker_port": 1883
+    }
+  ]
+}

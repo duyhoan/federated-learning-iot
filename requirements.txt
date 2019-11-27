@@ -1,0 +1,13 @@
+PyYAML
+h5py
+matplotlib
+numpy==1.13.3
+scipy==1.1.0
+sklearn
+scikit-image
+keras
+paho-mqtt
+memory-profiler
+Pympler
+google-cloud-storage
+dnspython
